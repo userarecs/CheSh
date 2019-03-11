@@ -34,7 +34,7 @@ ribbon:
   ConnectTimeout: 60000
 
 test:
-  cron: 0/10 * * * * ?
+  cron: 0/1 * * * * ?
 
   #抖音APP抓取任务批量创建Job定时任务  每天零点
 job:
