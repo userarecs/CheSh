@@ -40,7 +40,11 @@ logging:
 #spring线程池
 task_executor:
   core_pool_size: 5
-  max_pool_size: 10
+  max_pool_size: 9
   queue_capacity: 1
   name_prefix: async-service-
   keep_alive_seconds: 10
+  
+app:
+  shell:
+    path: http://localhost:80
