@@ -1,0 +1,69 @@
+server:
+  port: 8001
+
+#http://localhost:8000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/
+
+spring:
+  application:
+    name: ivma-appvideo-monitor
+  thymeleaf:
+    cache: false
+
+  datasource:
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    #url: jdbc:oracle:thin:@(description=(address_list= (address=(host=172.16.24.75)(protocol=tcp)(port=1521))(address=(host=172.16.24.76)(protocol=tcp) (port=1521)) (load_balance=yes)(failover=on))(connect_data=(service_name= orcl)))
+    url: jdbc:oracle:thin:@172.16.39.212:1521:rac2
+    username: ivma
+    password: ivma
+
+mybatis:
+  #实体类的包路径
+  type-aliases-package: com.certus.ivma.entity
+  #扫描classpath下mapper目录下的所有.xml文件
+  mapper-locations: classpath:mapper/*.xml
+
+feign:
+  httpclient:
+    enabled: true
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+test:
+  cron: 0/10 * * * * ?
+
+  #抖音APP抓取任务批量创建Job定时任务  每天零点
+job:
+  douYinAppCrawlTaskCreate:
+    cronExpression: 0 0 0 * * ?
+    runAfterStartup: false
+  guangDianAppCrawlTaskCreate:
+      cronExpression: 0 0 0 * * ?
+      runAfterStartup: false
+  emphasisAppCrawlTaskCreate:
+      cronExpression: 0 0 0 * * ?
+      runAfterStartup: false
+  notEmphasisAppCrawlTaskCreate:
+        cronExpression: 0 0 0 * * ?
+        runAfterStartup: false
+  failFastCrawlTaskReSchedule:
+        cronExpression: 0 0 */1 * * ?
+        runAfterStartup: true
+        runningTimeLimit: 30
+  appCrawlTaskDispatch:
+        cronExpression: 0 */1 * * * ?
+
+logging:
+  path: D:/rome/
+  file: springbootdemo.log
+  #TARCE < DEBUG < INFO 默认 < WARN < ERROR < FATAL
+  level:
+    root: INFO
+    com:
+      certus:
+        ivma:
+          mapper: DEBUG # 打印sql
