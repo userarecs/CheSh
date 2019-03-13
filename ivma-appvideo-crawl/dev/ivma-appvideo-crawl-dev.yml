@@ -48,3 +48,8 @@ task_executor:
 app:
   shell:
     path: http://localhost:80
+
+task:
+  execute:
+    max:
+      second: 60
