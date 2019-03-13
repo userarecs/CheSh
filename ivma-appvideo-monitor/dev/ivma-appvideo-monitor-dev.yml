@@ -29,6 +29,7 @@ mybatis:
 feign:
   httpclient:
     enabled: true
+  #打开断路器,默认关闭
   hystrix:
     enabled: true
 ribbon:
