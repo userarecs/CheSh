@@ -61,6 +61,7 @@ job:
     cronExpression: 0 */1 * * * ?
   crawlHostKeepAlive:
     cronExpression: 0 */1 * * * ?
+    keepAliveTimes: 120
         
 
 logging:
