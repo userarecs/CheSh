@@ -45,20 +45,23 @@ job:
     cronExpression: 0 0 0 * * ?
     runAfterStartup: false
   guangDianAppCrawlTaskCreate:
-      cronExpression: 0 0 0 * * ?
-      runAfterStartup: false
+    cronExpression: 0 0 0 * * ?
+    runAfterStartup: false
   emphasisAppCrawlTaskCreate:
-      cronExpression: 0 0 0 * * ?
-      runAfterStartup: false
+    cronExpression: 0 0 0 * * ?
+    runAfterStartup: false
   notEmphasisAppCrawlTaskCreate:
-        cronExpression: 0 0 0 * * ?
-        runAfterStartup: false
+    cronExpression: 0 0 0 * * ?
+    runAfterStartup: false
   failFastCrawlTaskReSchedule:
-        cronExpression: 0 0 */1 * * ?
-        runAfterStartup: true
-        runningTimeLimit: 30
+    cronExpression: 0 0 */1 * * ?
+    runAfterStartup: true
+    runningTimeLimit: 30
   appCrawlTaskDispatch:
-        cronExpression: 0 */1 * * * ?
+    cronExpression: 0 */1 * * * ?
+  crawlHostKeepAlive:
+    cronExpression: 0 */1 * * * ?
+        
 
 logging:
   path: D:/rome/
