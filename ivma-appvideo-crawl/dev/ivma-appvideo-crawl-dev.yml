@@ -49,7 +49,11 @@ app:
   shell:
     path: http://localhost:80
 
-task:
-  execute:
-    max:
+constants:
+  task:
+    execute:
+      max:
+        second: 60
+  host:
+    keepalive:
       second: 60
