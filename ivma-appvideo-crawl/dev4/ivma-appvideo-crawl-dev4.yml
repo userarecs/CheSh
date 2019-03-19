@@ -7,7 +7,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8000/eureka/
 crawl:
-  type: 4
+  type: 41
   
 spring:
   application:
