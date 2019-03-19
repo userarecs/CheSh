@@ -38,12 +38,19 @@ logging:
           mapper: DEBUG # 打印sql
 
 #spring线程池
-task_executor:
-  core_pool_size: 5
-  max_pool_size: 5
-  queue_capacity: 0
-  name_prefix: async-service-
-  keep_alive_seconds: 10
+thread_pool:
+  schedule_executor:
+    core_pool_size: 5
+    max_pool_size: 5
+    queue_capacity: 0
+    name_prefix: schedule-executor-
+    keep_alive_seconds: 10
+  execute_executor:
+    core_pool_size: 5
+    max_pool_size: 5
+    queue_capacity: 0
+    name_prefix: execute-executor-
+    keep_alive_seconds: 10
   
 app:
   shell:
