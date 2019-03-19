@@ -9,7 +9,7 @@ eureka:
 
 spring:
   application:
-    name: ivma-appvideo-crawl
+    name: ivma-appvideo-crawl4
   thymeleaf:
     cache: false
 
