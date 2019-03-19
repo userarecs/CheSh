@@ -47,7 +47,7 @@ thread_pool:
     keep_alive_seconds: 10
   execute_executor:
     core_pool_size: 5
-    max_pool_size: 5
+    max_pool_size: 500
     queue_capacity: 0
     name_prefix: execute-executor-
     keep_alive_seconds: 10
