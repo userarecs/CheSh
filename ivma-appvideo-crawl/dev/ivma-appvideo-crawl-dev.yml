@@ -53,7 +53,7 @@ constants:
   task:
     execute:
       max:
-        second: 60
+        second: 250
   host:
     keepalive:
       second: 60
