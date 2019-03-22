@@ -74,3 +74,7 @@ logging:
       certus:
         ivma:
           mapper: DEBUG # 打印sql
+
+constants:
+  crawlType:
+    count: 4
