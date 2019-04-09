@@ -25,8 +25,8 @@ spring:
   rabbitmq:
     host: 192.168.99.100
     port: 15672
-    username: admin
-    password: admin
+    username: adminuser
+    password: adminuser
 
   
 mybatis:
