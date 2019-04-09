@@ -21,7 +21,14 @@ spring:
     url: jdbc:oracle:thin:@172.16.39.212:1521:rac2
     username: ivma
     password: ivma
+    
+  rabbitmq:
+    host: 192.168.99.100
+    port: 15672
+    username: admin
+    password: admin
 
+  
 mybatis:
   #实体类的包路径
   type-aliases-package: com.certus.ivma.entity
