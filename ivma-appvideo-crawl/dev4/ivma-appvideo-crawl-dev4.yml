@@ -27,6 +27,16 @@ spring:
     port: 5672
     username: admin
     password: admin
+  
+  cloud:
+    stream:
+      bindings:
+        tasta:
+          destination: test_spring_stream
+          group: group-1
+          consumer:
+            concurrency: 1
+            partitioned: false
 
   
 mybatis:
