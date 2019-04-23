@@ -29,16 +29,24 @@ spring:
     password: admin
   
   cloud:
+    instance-count: 1
+    instance-index: 0
     stream:
+      kafka:
+        binder:
+          brokers: 172.16.12.7:9092
+          zk-nodes: 172.16.12.5:2182
+          auto-add-partitions: true
+          auto-create-topics: true
+          min-partition-count: 1
       bindings:
-        tasta:
+        output:
           destination: test_spring_stream
+          content-type: text/plain
           group: group-1
-          consumer:
-            concurrency: 1
-            partitioned: false
+          producer:
+            partitionCount: 1
 
-  
 mybatis:
   #实体类的包路径
   type-aliases-package: com.certus.ivma.entity
