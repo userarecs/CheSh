@@ -40,10 +40,9 @@ spring:
           auto-create-topics: true
           min-partition-count: 1
       bindings:
-        output:
+        sourceA:
           destination: test_spring_stream
           content-type: text/plain
-          group: group-1
           producer:
             partitionCount: 1
 
