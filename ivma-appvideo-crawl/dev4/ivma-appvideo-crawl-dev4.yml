@@ -41,7 +41,7 @@ spring:
           min-partition-count: 1
       bindings:
         sourceA:
-          destination: test_spring_stream
+          destination: QUEUE.APPINFOS
           content-type: text/plain
           producer:
             partitionCount: 1
