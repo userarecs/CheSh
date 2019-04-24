@@ -40,7 +40,7 @@ spring:
           auto-create-topics: true
           min-partition-count: 1
       bindings:
-        sourceA:
+        output:
           destination: QUEUE.APPINFOS
           content-type: text/plain
           producer:
