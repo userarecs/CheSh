@@ -1,17 +1,17 @@
 server:
-  port: 8002
+  port: 8005
 
 #http://localhost:8000
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8000/eureka/
-crawl:
+receive:
   type: 4
   
 spring:
   application:
-    name: ivma-appvideo-crawl${crawl.type}
+    name: ivma-appvideo-receive${receive.type}
   thymeleaf:
     cache: false
 
