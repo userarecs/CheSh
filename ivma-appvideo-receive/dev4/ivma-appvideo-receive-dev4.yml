@@ -34,14 +34,14 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: 172.16.12.7:9092
-          zk-nodes: 172.16.12.5:2182
+          brokers: 172.16.12.12:9091
+          zk-nodes: 172.16.12.11:2181
           auto-add-partitions: true
           auto-create-topics: true
           min-partition-count: 1
       bindings:
         testa:
-          destination: test_spring_stream
+          destination: QUEUE.APPINFOS
           group: group-1
           content-type: text/plain
           consumer:
