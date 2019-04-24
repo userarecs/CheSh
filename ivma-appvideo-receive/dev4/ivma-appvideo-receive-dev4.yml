@@ -40,11 +40,13 @@ spring:
           auto-create-topics: true
           min-partition-count: 1
       bindings:
-        sourceA:
+        testa:
           destination: test_spring_stream
+          group: group-1
           content-type: text/plain
-          producer:
-            partitionCount: 1
+          consumer:
+            concurrency: 1
+            partitioned: false
 
 mybatis:
   #实体类的包路径
