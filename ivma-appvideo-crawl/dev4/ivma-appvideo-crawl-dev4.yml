@@ -29,22 +29,23 @@ spring:
     password: admin
   
   cloud:
-    instance-count: 1
-    instance-index: 0
     stream:
-      kafka:
-        binder:
-          brokers: 172.16.12.12:9091
-          zk-nodes: 172.16.12.11:2181
-          auto-add-partitions: true
-          auto-create-topics: true
-          min-partition-count: 1
       bindings:
-        output:
+        #配置自己定义的通道与哪个中间件交互
+        shop_input: #ShopChannel里Input和Output的值
+          destination: QUEUE.APPINFOS #目标主题
+        shop_output:
           destination: QUEUE.APPINFOS
-          content-type: text/plain
-          producer:
-            partitionCount: 1
+      default-binder: kafka #默认的binder是kafka
+      
+  kafka:
+    bootstrap-servers: 172.16.12.12:9091 #kafka服务地址
+    consumer:
+      group-id: consumer1
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      client-id: producer1
 
 mybatis:
   #实体类的包路径
