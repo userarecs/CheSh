@@ -22,37 +22,7 @@ spring:
     username: ivma
     password: ivma
 
-  cloud:
-    stream:
-      bindings:
-        #配置自己定义的通道与哪个中间件交互
-        shop_input: #ShopChannel里Input和Output的值
-          destination: QUEUE.APPINFOS #目标主题
-        shop_output:
-          destination: QUEUE.APPINFOS
-      default-binder: kafka #默认的binder是kafka
-      
-  kafka:
-    # 指定kafka 代理地址，可以多个
-    bootstrap-servers: 172.16.12.12:9091 #kafka服务地址
-    
-    consumer:
-      group-id: consumer1
-      auto-offset-reset: earliest
-      enable-auto-commit: true
-      auto-commit-interval: 100
-      # 指定消息key和消息体的编解码方式
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      
-    producer:
-      # 指定消息key和消息体的编解码方式
-      key-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-      # 每次批量发送消息的数量
-      batch-size: 16384
-      buffer-memory: 33554432
-      client-id: producer1
+
 
 mybatis:
   #实体类的包路径
