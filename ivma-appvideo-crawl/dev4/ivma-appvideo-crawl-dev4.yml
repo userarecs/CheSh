@@ -21,13 +21,7 @@ spring:
     url: jdbc:oracle:thin:@172.16.39.212:1521:rac2
     username: ivma
     password: ivma
-    
-  rabbitmq:
-    host: 192.168.99.100
-    port: 5672
-    username: admin
-    password: admin
-  
+
   cloud:
     stream:
       bindings:
@@ -39,12 +33,25 @@ spring:
       default-binder: kafka #默认的binder是kafka
       
   kafka:
+    # 指定kafka 代理地址，可以多个
     bootstrap-servers: 172.16.12.12:9091 #kafka服务地址
-    #consumer:
-      #group-id: consumer1
+    
+    consumer:
+      group-id: consumer1
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      # 指定消息key和消息体的编解码方式
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      
     producer:
+      # 指定消息key和消息体的编解码方式
       key-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
       value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      # 每次批量发送消息的数量
+      batch-size: 16384
+      buffer-memory: 33554432
       client-id: producer1
 
 mybatis:
