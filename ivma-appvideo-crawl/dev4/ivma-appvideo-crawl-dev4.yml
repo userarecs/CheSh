@@ -23,14 +23,10 @@ spring:
     password: ivma
 
   kafka:
-    producer:
+    bootstrap-servers: 172.16.12.12:9092
+    producer:#生产者
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    bootstrap-servers: 172.16.12.12:9092
-    consumer: # 消费者
-      group-id: gerry-1
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 kafka:
   topic: topic-test
 
