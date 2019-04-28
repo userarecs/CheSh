@@ -26,14 +26,24 @@ spring:
     password: ivma
 
   cloud:
+    instance-count: 1
+    instance-index: 0
     stream:
+      kafka:
+        binder:
+          brokers: 172.16.12.12:9092
+          zk-nodes: 172.16.12.11:2181
+          auto-add-partitions: true
+          auto-create-topics: true
+          min-partition-count: 1
       bindings:
-        #配置自己定义的通道与哪个中间件交互
-        shop_input: #ShopChannel里Input和Output的值
-          destination: QUEUE.APPINFOS #目标主题
-        shop_output:
-          destination: QUEUE.APPINFOS
-      default-binder: kafka #默认的binder是kafka
+        input:
+          destination: topic-test
+          group: s1
+          consumer:
+            autoCommitOffset: false
+            concurrency: 1
+            partitioned: false
 
   kafka:
     bootstrap-servers: 172.16.12.12:9092
