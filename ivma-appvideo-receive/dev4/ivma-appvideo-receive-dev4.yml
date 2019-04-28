@@ -11,7 +11,7 @@ eureka:
       instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
 receive:
   type: 4
-  
+
 spring:
   application:
     name: ivma-appvideo-receive${receive.type}
@@ -26,24 +26,23 @@ spring:
     password: ivma
 
   cloud:
-    instance-count: 1
-    instance-index: 0
     stream:
-      kafka:
-        binder:
-          brokers: 172.16.12.12:9092
-          zk-nodes: 172.16.12.11:2181
-          auto-add-partitions: true
-          auto-create-topics: true
-          min-partition-count: 1
       bindings:
-        input:
-          destination: topic-test
-          group: s1
-          consumer:
-            autoCommitOffset: false
-            concurrency: 1
-            partitioned: false
+        #配置自己定义的通道与哪个中间件交互
+        shop_input: #ShopChannel里Input和Output的值
+          destination: QUEUE.APPINFOS #目标主题
+        shop_output:
+          destination: QUEUE.APPINFOS
+      default-binder: kafka #默认的binder是kafka
+
+  kafka:
+    bootstrap-servers: 172.16.12.12:9092
+    consumer: # 消费者
+      group-id: gerry-1
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+kafka:
+  topic: topic-test
 
 mybatis:
   #实体类的包路径
@@ -76,7 +75,7 @@ thread_pool:
     queue_capacity: 0
     name_prefix: execute-executor-
     keep_alive_seconds: 10
-  
+
 app:
   shell:
     path: http://localhost:80
@@ -88,4 +87,4 @@ constants:
         second: 60
   host:
     keepalive:
-        second: 60
+      second: 60
