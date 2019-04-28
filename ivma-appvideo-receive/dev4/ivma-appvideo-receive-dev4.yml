@@ -1,5 +1,5 @@
 server:
-  port: 8006
+  port: 8005
 
 #http://localhost:8000
 eureka:
@@ -32,7 +32,7 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 kafka:
-  topic: topic-test
+  topic: appvideo
 
 mybatis:
   #实体类的包路径
