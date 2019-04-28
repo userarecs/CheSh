@@ -1,5 +1,5 @@
 server:
-  port: 8006
+  port: 8007
 
 #http://localhost:8000
 eureka:
@@ -28,7 +28,7 @@ spring:
   kafka:
     bootstrap-servers: 172.16.12.12:9092
     consumer: # 消费者
-      group-id: gerry-1
+      group-id: gerry-2
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 kafka:
