@@ -28,7 +28,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 kafka:
-  topic: topic-test
+  topic: appvideo
 
 mybatis:
   #实体类的包路径
