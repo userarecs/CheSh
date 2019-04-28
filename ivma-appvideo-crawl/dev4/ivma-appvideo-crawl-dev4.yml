@@ -8,7 +8,7 @@ eureka:
       defaultZone: http://172.16.12.2:8000/eureka/
 crawl:
   type: 4
-  
+
 spring:
   application:
     name: ivma-appvideo-crawl${crawl.type}
@@ -22,23 +22,13 @@ spring:
     username: ivma
     password: ivma
 
-  cloud:
-    instance-count: 1
-    instance-index: 0
-    stream:
-      kafka:
-        binder:
-          brokers: 172.16.12.12:9092
-          zk-nodes: 172.16.12.11:2181
-          auto-add-partitions: true
-          auto-create-topics: true
-          min-partition-count: 1
-      bindings:
-        output:
-          destination: topic-test
-          content-type: text/plain
-          producer:
-            partitionCount: 1
+  kafka:
+    bootstrap-servers: 172.16.12.12:9092
+    producer: #生产者
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+kafka:
+  topic: topic-test
 
 mybatis:
   #实体类的包路径
@@ -71,7 +61,7 @@ thread_pool:
     queue_capacity: 0
     name_prefix: execute-executor-
     keep_alive_seconds: 10
-  
+
 app:
   shell:
     path: http://localhost:80
