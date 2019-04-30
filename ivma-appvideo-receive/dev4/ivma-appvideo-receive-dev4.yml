@@ -19,11 +19,31 @@ spring:
     cache: false
 
   datasource:
-    driverClassName: oracle.jdbc.driver.OracleDriver
-    #url: jdbc:oracle:thin:@(description=(address_list= (address=(host=172.16.24.75)(protocol=tcp)(port=1521))(address=(host=172.16.24.76)(protocol=tcp) (port=1521)) (load_balance=yes)(failover=on))(connect_data=(service_name= orcl)))
+    # 数据源配置
+    type: com.alibaba.druid.pool.DruidDataSource
+#   url: jdbc:mysql://localhost:3306/zuoqing?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
     url: jdbc:oracle:thin:@172.16.39.212:1521:rac2
     username: ivma
     password: ivma
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    # 下面为连接池的补充设置，应用到上面所有数据源中
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙,防止sql注入
+    filters: stat,wall,log4j
+    logSlowSql: true
+    #http://localhost:8765/druid/sql.html  访问这个页面
 
   kafka:
     bootstrap-servers: 172.16.12.12:9092
