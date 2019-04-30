@@ -45,7 +45,7 @@ spring:
     testOnBorrow: false
     testOnReturn: false
     # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙,防止sql注入
-    filters: stat,wall,log4j
+    filters: stat,wall,slf4j
     logSlowSql: true
     #http://localhost:8765/druid/sql.html  访问这个页面
 
