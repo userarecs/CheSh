@@ -54,8 +54,8 @@ spring:
     consumer: # 消费者
       # 指定默认消费者group id
       group-id: gerry-1
-      auto-offset-reset: earliest #当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，从头开始消费 
-      #auto-offset-reset: latest   #当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，消费新产生的该分区下的数据 
+      #auto-offset-reset: earliest #当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，从头开始消费 
+      auto-offset-reset: latest   #当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，消费新产生的该分区下的数据 
       enable-auto-commit: true
       auto-commit-interval: 10000
       # 指定消息key和消息体的编解码方式
