@@ -53,6 +53,8 @@ spring:
     bootstrap-servers: 172.16.12.12:9092
     consumer: # 消费者
       group-id: gerry-1
+      enable-auto-commit: true
+      auto-commit-interval: 1000
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 kafka:
