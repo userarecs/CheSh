@@ -52,9 +52,12 @@ spring:
   kafka:
     bootstrap-servers: 172.16.12.12:9092
     consumer: # 消费者
+      # 指定默认消费者group id
       group-id: gerry-1
+      auto-offset-reset: earliest #当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，从头开始消费 
       enable-auto-commit: true
-      auto-commit-interval: 1000
+      auto-commit-interval: 10000
+      # 指定消息key和消息体的编解码方式
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 kafka:
