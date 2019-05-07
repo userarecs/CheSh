@@ -22,15 +22,22 @@ spring:
     username: ivma
     password: ivma
 
-  kafka:
-    bootstrap-servers: 172.16.12.12:9092
-    producer: #生产者
-      # 每次批量发送消息的数量
-      batch-size: 16384
-      buffer-memory: 33554432
-      # 指定消息key和消息体的编解码方式
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: appvideo
+          content-type: text/plain
+          producer:
+            partitionCount: 1
+            partitionKeyExtractorClass: org.springframework.cloud.stream.partitioning.CustomPartitionKeyExtractorClass
+            partitionSelectorClass: org.springframework.cloud.stream.partitioning.CustomPartitionSelectorClass
+            headerMode: raw
+            bufferSize: 16384
+            maxRequestSize: 1048576
+            sync: true
+            batchTimeout: 0
+
 kafka:
   topic: appvideo
 
