@@ -1,0 +1,84 @@
+server:
+  port: 8005
+
+#durid登陆账号密码
+loginPassword: ivma
+loginUsername: ivma
+
+#http://localhost:8000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://172.16.12.2:8000/eureka/
+    instance:
+      preferIpAddress: true
+      instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+receive:
+  type: 4
+
+spring:
+  application:
+    name: ivma-appvideo-receive${receive.type}
+  thymeleaf:
+    cache: false
+
+  datasource:
+    # 数据源配置
+    type: com.alibaba.druid.pool.DruidDataSource
+#   url: jdbc:mysql://localhost:3306/zuoqing?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
+    url: jdbc:oracle:thin:@172.16.39.212:1521:rac2
+    username: ivma
+    password: ivma
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    # 下面为连接池的补充设置，应用到上面所有数据源中
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙,防止sql注入
+    filters: stat,wall,slf4j
+    logSlowSql: true
+    #http://localhost:8765/druid/sql.html  访问这个页面
+
+  kafka:
+    bootstrap-servers: 172.16.12.12:9092
+    consumer: # 消费者
+      # 指定默认消费者group id
+      group-id: gerry-1
+      #auto-offset-reset: earliest #当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，从头开始消费 
+      auto-offset-reset: latest   #当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，消费新产生的该分区下的数据 
+      # 自动提交
+      enable-auto-commit: false
+      # 自动提交间隔
+      auto-commit-interval: 10000
+      # 指定消息key和消息体的编解码方式
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+kafka:
+  topic: appvideo
+
+mybatis:
+  #实体类的包路径
+  type-aliases-package: com.certus.ivma.entity
+  #扫描classpath下mapper目录下的所有.xml文件
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  path: D:/rome/
+  file: springbootdemo.log
+  #TARCE < DEBUG < INFO 默认 < WARN < ERROR < FATAL
+  level:
+    root: INFO
+    com:
+      certus:
+        ivma:
+          mapper: DEBUG # 打印sql
