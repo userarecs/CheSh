@@ -49,20 +49,22 @@ spring:
     logSlowSql: true
     #http://localhost:8765/druid/sql.html  访问这个页面
 
-  kafka:
-    bootstrap-servers: 172.16.12.12:9092
-    consumer: # 消费者
-      # 指定默认消费者group id
-      group-id: gerry-1
-      #auto-offset-reset: earliest #当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，从头开始消费 
-      auto-offset-reset: latest   #当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，消费新产生的该分区下的数据 
-      # 自动提交
-      enable-auto-commit: false
-      # 自动提交间隔
-      auto-commit-interval: 10000
-      # 指定消息key和消息体的编解码方式
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: appvideo
+          content-type: text/plain
+          consumer:
+            concurrency: 1 ## The concurrency of the inbound consumer.
+            partitioned: false ## Whether the consumer receives data from a partitioned producer.Default: false.
+            headerMode: raw
+            autoCommitOffset: false
+            resetOffsets: true
+            startOffset: earliest
+            enableDlq: false
+            recoveryInterval: 5000
+      
 kafka:
   topic: appvideo
 
