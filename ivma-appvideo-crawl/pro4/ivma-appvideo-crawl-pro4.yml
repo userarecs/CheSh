@@ -39,8 +39,8 @@ spring:
           content-type: text/plain
           producer:
             partitionCount: 1
-            partitionKeyExtractorClass: org.springframework.cloud.stream.partitioning.CustomPartitionKeyExtractorClass
-            partitionSelectorClass: org.springframework.cloud.stream.partitioning.CustomPartitionSelectorClass
+            #partitionKeyExtractorClass: org.springframework.cloud.stream.partitioning.CustomPartitionKeyExtractorClass
+            #partitionSelectorClass: org.springframework.cloud.stream.partitioning.CustomPartitionSelectorClass
             headerMode: raw
             bufferSize: 16384
             maxRequestSize: 1048576
