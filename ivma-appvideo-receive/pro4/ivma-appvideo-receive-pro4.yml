@@ -50,6 +50,7 @@ spring:
     #http://localhost:8765/druid/sql.html  访问这个页面
 
   cloud:
+    # 同一个应用的实例数量和实例索引
     instance-count: 1
     instance-index: 0
     stream:
@@ -62,12 +63,18 @@ spring:
           min-partition-count: 1
       bindings:
         input:
+          # input通道对应的设置
           destination: appvideo
           group: s1
           content-type: text/plain
           consumer:
+            # 配置分区的输入绑定
             concurrency: 1 ## The concurrency of the inbound consumer.
             partitioned: false ## Whether the consumer receives data from a partitioned producer.Default: false.
+            # autoRebalanceEnabled为true(default)时，Kafka负责在实例之间分布partitions，不需要这些属性：instanceCount，instanceIndex，partitioned
+            # autoRebalanceEnabled为false时，binder使用instanceCount and instanceIndex决定实例订阅哪个partition
+            # partition数量至少要与实例数量一致 binder代替Kafka计算partitions 这可以让特定分区的消息始终进入同一个实例
+            autoRebalanceEnabled: true
             headerMode: raw
             autoCommitOffset: false
             resetOffsets: true
