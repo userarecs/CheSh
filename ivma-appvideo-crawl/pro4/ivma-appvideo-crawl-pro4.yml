@@ -23,6 +23,8 @@ spring:
     password: ivma
 
   cloud:
+    instance-count: 1
+    instance-index: 0
     stream:
       kafka:
         binder:
