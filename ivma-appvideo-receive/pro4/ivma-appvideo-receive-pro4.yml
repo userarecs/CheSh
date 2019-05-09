@@ -50,6 +50,8 @@ spring:
     #http://localhost:8765/druid/sql.html  访问这个页面
 
   cloud:
+    instance-count: 1
+    instance-index: 0
     stream:
       kafka:
         binder:
