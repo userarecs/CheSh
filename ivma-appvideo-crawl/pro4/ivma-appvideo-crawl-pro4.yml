@@ -37,7 +37,7 @@ spring:
           min-partition-count: 1
       bindings:
         output:
-          destination: appvideo
+          destination: ${kafka.topic}
           content-type: text/plain
           producer:
             # 输出消息分布到3个分区
