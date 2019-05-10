@@ -22,6 +22,8 @@ spring:
     username: ivma
     password: ivma
 
+  kafka:
+    bootstrap-servers: 172.16.12.12:9092
   cloud:
     instance-count: 1
     instance-index: 0
@@ -38,6 +40,7 @@ spring:
           destination: appvideo
           content-type: text/plain
           producer:
+            # 输出消息分布到3个分区
             partitionCount: 1
             #partitionKeyExtractorClass: org.springframework.cloud.stream.partitioning.CustomPartitionKeyExtractorClass
             #partitionSelectorClass: org.springframework.cloud.stream.partitioning.CustomPartitionSelectorClass
