@@ -49,6 +49,8 @@ spring:
     logSlowSql: true
     #http://localhost:8765/druid/sql.html  访问这个页面
 
+  kafka:
+    bootstrap-servers: 172.16.12.12:9092
   cloud:
     # 同一个应用的实例数量和实例索引
     instance-count: 1
@@ -64,7 +66,7 @@ spring:
       bindings:
         input:
           # input通道对应的设置
-          destination: appvideo
+          destination: ${kafka.topic}
           group: s1
           content-type: text/plain
           consumer:
