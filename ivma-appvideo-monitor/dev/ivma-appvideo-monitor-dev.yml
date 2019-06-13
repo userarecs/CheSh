@@ -59,6 +59,8 @@ job:
     runningTimeLimit: 30
   appCrawlTaskDispatch:
     cronExpression: 0 */1 * * * ?
+  taskAutoRefreshFrequency:
+    cronExpression: 0 */1 * * * ?
   crawlHostKeepAlive:
     cronExpression: 0 */1 * * * ?
     keepAliveTimes: 120
