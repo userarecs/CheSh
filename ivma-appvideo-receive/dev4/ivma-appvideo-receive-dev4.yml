@@ -9,7 +9,7 @@ loginUsername: ivma
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://172.16.12.2:8000/eureka/
+      defaultZone: http://127.0.0.1:8000/eureka/
     instance:
       preferIpAddress: true
       instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
@@ -21,6 +21,10 @@ spring:
     name: ivma-appvideo-receive${receive.type}
   thymeleaf:
     cache: false
+  devtools:
+    restart:
+      additional-paths: src/main/java
+      exclude: static/**,public/**
 
   datasource:
     # 数据源配置
@@ -51,18 +55,39 @@ spring:
 
   kafka:
     bootstrap-servers: 172.16.12.12:9092
-    consumer: # 消费者
-      # 指定默认消费者group id
-      group-id: gerry-1
-      #auto-offset-reset: earliest #当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，从头开始消费 
-      auto-offset-reset: latest   #当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，消费新产生的该分区下的数据 
-      # 自动提交
-      enable-auto-commit: false
-      # 自动提交间隔
-      auto-commit-interval: 10000
-      # 指定消息key和消息体的编解码方式
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  cloud:
+    # 同一个应用的实例数量和实例索引
+    instance-count: 1
+    instance-index: 0
+    stream:
+      kafka:
+        binder:
+          brokers: 172.16.12.12:9092
+          zk-nodes: 172.16.12.11:2181
+          auto-add-partitions: true
+          auto-create-topics: true
+          min-partition-count: 1
+      bindings:
+        input:
+          # input通道对应的设置
+          destination: ${kafka.topic}
+          group: s1
+          content-type: text/plain
+          consumer:
+            # 配置分区的输入绑定
+            concurrency: 1 ## The concurrency of the inbound consumer.
+            partitioned: false ## Whether the consumer receives data from a partitioned producer.Default: false.
+            # autoRebalanceEnabled为true(default)时，Kafka负责在实例之间分布partitions，不需要这些属性：instanceCount，instanceIndex，partitioned
+            # autoRebalanceEnabled为false时，binder使用instanceCount and instanceIndex决定实例订阅哪个partition
+            # partition数量至少要与实例数量一致 binder代替Kafka计算partitions 这可以让特定分区的消息始终进入同一个实例
+            autoRebalanceEnabled: true
+            headerMode: raw
+            autoCommitOffset: false
+            resetOffsets: true
+            startOffset: earliest
+            enableDlq: false
+            recoveryInterval: 5000
+      
 kafka:
   topic: appvideo
 
@@ -82,31 +107,3 @@ logging:
       certus:
         ivma:
           mapper: DEBUG # 打印sql
-
-#spring线程池
-thread_pool:
-  schedule_executor:
-    core_pool_size: 5
-    max_pool_size: 5
-    queue_capacity: 0
-    name_prefix: schedule-executor-
-    keep_alive_seconds: 10
-  execute_executor:
-    core_pool_size: 5
-    max_pool_size: 500
-    queue_capacity: 0
-    name_prefix: execute-executor-
-    keep_alive_seconds: 10
-
-app:
-  shell:
-    path: http://localhost:80
-
-constants:
-  task:
-    execute:
-      max:
-        second: 60
-  host:
-    keepalive:
-      second: 60
