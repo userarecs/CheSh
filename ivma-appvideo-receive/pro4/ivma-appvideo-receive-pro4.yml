@@ -21,6 +21,10 @@ spring:
     name: ivma-appvideo-receive${receive.type}
   thymeleaf:
     cache: false
+  devtools:
+    restart:
+      additional-paths: src/main/java
+      exclude: static/**,public/**
 
   datasource:
     # 数据源配置
