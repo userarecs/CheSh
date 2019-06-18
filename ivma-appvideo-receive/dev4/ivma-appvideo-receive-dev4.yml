@@ -1,10 +1,6 @@
 server:
   port: 8005
 
-#durid登陆账号密码
-loginPassword: ivma
-loginUsername: ivma
-
 #http://localhost:8000
 eureka:
   client:
@@ -25,6 +21,10 @@ eureka:
 
 receive:
   type: 4
+
+#durid登陆账号密码
+loginPassword: ivma
+loginUsername: ivma
 
 spring:
   application:
