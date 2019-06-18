@@ -8,11 +8,21 @@ loginUsername: ivma
 #http://localhost:8000
 eureka:
   client:
+    healthcheck:
+      #这里是否需要开启健康检查   ,答:可以不开启     开启健康检查（需要spring-boot-starter-actuator依赖）
+      enabled: true
+    #是否可检索
+    fetch-registry: true
+    #是否注册到eureka服务器
+    register-with-eureka: true
     serviceUrl:
-      defaultZone: http://127.0.0.1:8000/eureka/
-    instance:
-      preferIpAddress: true
-      instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+      defaultZone: http://172.16.12.2:8000/eureka/
+  instance:
+    # 默认30s，表示eureka client发送心跳给server端的频率
+    lease-renewal-interval-in-seconds: 10
+    # 默认90s，表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance
+    lease-expiration-duration-in-seconds: 30
+
 receive:
   type: 4
 
